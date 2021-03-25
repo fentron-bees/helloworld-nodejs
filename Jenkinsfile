@@ -35,11 +35,14 @@ pipeline {
             echo "TODO - build and push image"
           }
         }
-                stage('Deploy') {
+        stage('Deploy') {
           agent any
           environment {
             FAVORITE_COLOR = 'BLUE'
             SERVICE_CREDS = credentials('example-service-username-password')
+          }
+          options {
+            timeout(time: 30, unit: 'SECONDS') 
           }
           input {
             message "Should we continue with deployment?"
